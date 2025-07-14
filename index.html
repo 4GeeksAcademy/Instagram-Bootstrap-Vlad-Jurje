@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram-like Layout</title>
+  <!-- Bootstrap 4 CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom CSS */
+    .post-card {
+      margin-bottom: 20px;
+    }
+    .caption {
+      font-size: 14px;
+      color: #555;
+    }
+    .grid-view img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .post-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .grid-view {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    .grid-view.single img {
+      width: 100%;
+      height: 400px;
+    }
+    .grid-view.multi img {
+      height: 200px;
+    }
+    .settings-menu {
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .settings-menu a {
+      text-decoration: none;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Instagram</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <button class="btn btn-success" id="createPostBtn">Create a new post</button>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="settingsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="navbar-text">⚙️</span>
+          </a>
+          <div class="dropdown-menu settings-menu" aria-labelledby="settingsDropdown">
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="#">Accessibility</a>
+            <a class="dropdown-item" href="#">Privacy and Data</a>
+            <a class="dropdown-item text-danger" href="#">Log out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <!-- Image Display Toggle -->
+    <div class="d-flex justify-content-start">
+      <button class="btn btn-outline-primary" id="viewOneImageBtn">View One Image</button>
+      <button class="btn btn-outline-primary ml-3" id="viewNineImagesBtn">View Nine Images</button>
+    </div>
+
+    <!-- Grid of images (Initially showing one image) -->
+    <div class="grid-view mt-3" id="gridView">
+      <div class="post-card">
+        <img src="https://placeimg.com/640/480/animals" alt="Post Image" class="post-image">
+        <div class="caption">This is an example of a very good photo that you can post on Instagram.</div>
+        <div>204 Likes</div>
+      </div>
+    </div>
+
+    <!-- Modal for creating a new post -->
+    <div class="modal fade" id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="createPostModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createPostModalLabel">Create a New Post</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="captionInput">Caption</label>
+                <input type="text" class="form-control" id="captionInput" placeholder="Add the caption of your post here">
+              </div>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Publish</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 4 and jQuery Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Handle grid view toggle
+    document.getElementById('viewOneImageBtn').addEventListener('click', function() {
+      document.getElementById('gridView').classList.remove('multi');
+      document.getElementById('gridView').classList.add('single');
+    });
+
+    document.getElementById('viewNineImagesBtn').addEventListener('click', function() {
+      document.getElementById('gridView').classList.remove('single');
+      document.getElementById('gridView').classList.add('multi');
+    });
+
+    // Open create post modal
+    document.getElementById('createPostBtn').addEventListener('click', function() {
+      $('#createPostModal').modal('show');
+    });
+  </script>
+</body>
+</html>
